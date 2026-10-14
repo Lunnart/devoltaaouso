@@ -1,0 +1,16 @@
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { useState } from 'react'
+import { ArrowLeft, MapPin, Weight, Repeat2, Package, Building2, ArrowUpRight, ShieldCheck } from 'lucide-react'
+import { lots, formatPrice } from '@/lib/marketplace'
+import { ActionDialog, LotCard } from '@/components/marketplace'
+import { Button } from '@/components/ui/button'
+
+export const Route = createFileRoute('/lotes/$id')({
+ head: ({ params }) => { const lot = lots.find(l => l.id === params.id); const title = `${lot?.title ?? 'Lote não encontrado'} | Circular`; const description = lot?.description ?? 'Explore os materiais disponíveis na Circular.'; return { meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] } },
+ component: LotDetail,
+})
+function LotDetail() {
+ const { id } = Route.useParams(); const lot = lots.find(l => l.id === id); const [contact, setContact] = useState(false)
+ if (!lot) return <main className="container empty-state"><h1>Lote não encontrado</h1><Button asChild><Link to="/catalogo">Explorar catálogo</Link></Button></main>
+ return <main className="container detail-page"><Link className="back-link" to="/catalogo"><ArrowLeft size={16} />Voltar para os resíduos</Link><div className="detail-grid"><div><img className="detail-photo" src={lot.image} alt={lot.title} width={700} height={600} /><p className="photo-caption">Imagem ilustrativa · Anúncio de demonstração</p></div><div className="detail-content"><span className="category-tag">{lot.category}</span><h1>{lot.title}</h1><p className="detail-location"><MapPin size={17} />{lot.city}, {lot.state} · Localização aproximada</p><div className="detail-facts"><div><Weight /><span>Peso estimado<strong>{lot.weight}</strong></span></div><div>{lot.recurring ? <Repeat2 /> : <Package />}<span>Tipo de geração<strong>{lot.recurring ? 'Recorrente' : 'Lote único'}</strong></span></div></div><div className="detail-price"><span>Preço estimado</span><strong>{formatPrice(lot.price)} <small>{lot.unit}</small></strong></div><Button className="h-12 w-full" onClick={() => setContact(true)}>Enviar proposta <ArrowUpRight size={18} /></Button><p className="detail-safety"><ShieldCheck size={16} />Negociação direta, novas possibilidades.</p><div className="generator"><Building2 /><div><strong>{lot.company}</strong><span>Empresa geradora · Perfil demonstrativo</span></div></div></div></div><section className="description-section"><h2>Sobre este material</h2><p>{lot.description}</p><p className="demo-note">Dados fictícios para demonstração. Os preços não constituem oferta comercial. Transporte, documentação ambiental e condições de retirada devem ser acordados entre as partes.</p></section><section className="related-section"><h2>Outros materiais, novas possibilidades</h2><div className="lots-grid">{lots.filter(l => l.id !== id).slice(0,4).map(l => <LotCard key={l.id} lot={l} />)}</div></section><ActionDialog open={contact} onOpenChange={setContact} lot={lot} /></main>
+}
