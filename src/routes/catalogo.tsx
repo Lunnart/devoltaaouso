@@ -6,13 +6,13 @@ import { LotCard } from '@/components/marketplace'
 import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/catalogo')({
-  validateSearch: (search: Record<string, unknown>) => ({ categoria: typeof search.categoria === 'string' ? search.categoria : '' }),
+  validateSearch: (search: Record<string, unknown>): { categoria?: string } => ({ categoria: typeof search['categoria'] === 'string' ? search['categoria'] : '' }),
   head: () => ({ meta: [{ title: 'Explorar resíduos | Circular' }, { name: 'description', content: 'Encontre lotes de materiais recicláveis no Brasil. Filtre por categoria e estado e descubra novas oportunidades circulares.' }, { property: 'og:title', content: 'Catálogo de resíduos | Circular' }, { property: 'og:description', content: 'Materiais com potencial para um novo ciclo. Explore oportunidades de reciclagem no Brasil.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }),
   component: Catalog,
 })
 function Catalog() {
  const { categoria } = Route.useSearch()
- const [category, setCategory] = useState(categoria)
+ const [category, setCategory] = useState(categoria ?? '')
  const [state, setState] = useState('')
  const [search, setSearch] = useState('')
  const [sort, setSort] = useState('recent')
