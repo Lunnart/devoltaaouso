@@ -4,9 +4,11 @@ import metal from '@/assets/metal.jpg'
 import madeira from '@/assets/madeira.jpg'
 import eletronicos from '@/assets/eletronicos.jpg'
 import textil from '@/assets/textil.jpg'
+import vidro from '@/assets/vidro.jpg'
 
 export const categories = ['Plásticos', 'Papel e Papelão', 'Sucata Metálica', 'Madeira e Paletes', 'Eletrônicos', 'Têxtil', 'Vidro'] as const
 export const lots = [
+  { id: 'cacos-vidro', title: 'Cacos de vidro misto separados', category: 'Vidro', image: vidro, city: 'Rio de Janeiro', state: 'RJ', weight: '4 toneladas/mês', recurring: true, price: 180, unit: '/ tonelada', company: 'Cooperativa Recomeço', description: 'Vidro pós-consumo verde e transparente, triado por cooperativa e acondicionado em caçamba coberta. Sem cerâmica ou espelhos. Volume estimado mensal, com carregamento e transporte a combinar.' },
   { id: 'pet-prensado', title: 'PET transparente prensado', category: 'Plásticos', image: plasticos, city: 'Campinas', state: 'SP', weight: '5 toneladas/mês', recurring: true, price: 2300, unit: '/ tonelada', company: 'Bebidas Vale Verde', description: 'Garrafas PET pós-consumo, transparentes e azul-claro, separadas e prensadas em fardos. Material seco, armazenado em galpão coberto. Disponibilidade recorrente e carregamento com empilhadeira.' },
   { id: 'papelao-ondulado', title: 'Papelão ondulado enfardado', category: 'Papel e Papelão', image: papel, city: 'Guarulhos', state: 'SP', weight: '8 toneladas/mês', recurring: true, price: 650, unit: '/ tonelada', company: 'Logística Horizonte', description: 'Papelão ondulado proveniente de centro de distribuição, livre de umidade e separado na origem. Fardos de aproximadamente 300 kg. Coleta a combinar em dias úteis.' },
   { id: 'aluminio-industrial', title: 'Sucata de alumínio industrial', category: 'Sucata Metálica', image: metal, city: 'Contagem', state: 'MG', weight: '2,5 toneladas', recurring: false, price: 6800, unit: '/ tonelada', company: 'Metalúrgica Novo Ciclo', description: 'Retalhos e aparas de alumínio provenientes de usinagem industrial. Material segregado, sem mistura com metais ferrosos. Disponível para retirada em lote único.' },
