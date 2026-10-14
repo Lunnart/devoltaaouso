@@ -1,24 +1,24 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { useState } from 'react'
+import { ArrowUpRight, ArrowRight, Leaf, Recycle, Factory, Sprout, Search, MapPin, ChevronDown, Milk, ScrollText, Cog, Layers, Cpu, Shirt, Wine, MoveUpRight } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { ActionDialog, LotCard, SectionLink } from '@/components/marketplace'
+import { categories, lots } from '@/lib/marketplace'
+import hero from '@/assets/circular-hero.jpg'
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
+  head: () => ({ meta: [{ title: 'Circular — Resíduos que conectam. Recursos que transformam.' }, { name: 'description', content: 'Conectamos empresas geradoras de resíduos a recicladores e cooperativas. Descubra oportunidades para uma economia mais circular.' }, { property: 'og:title', content: 'Circular — Todo resíduo merece um novo começo.' }, { property: 'og:description', content: 'O que sobra para um pode ser o começo para outro. Encontre e ofereça materiais recicláveis no Brasil.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }),
   component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+})
+const categoryIcons = [Milk, ScrollText, Cog, Layers, Cpu, Shirt, Wine]
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  const [announce, setAnnounce] = useState(false)
+  return <main>
+    <section className="hero"><img className="hero-photo" src={hero} alt="Fardos de materiais recicláveis em um galpão aberto cercado por vegetação brasileira" width={1536} height={1024} fetchPriority="high" /><div className="hero-shade" /><div className="container hero-inner"><div className="hero-copy"><span className="hero-eyebrow"><span />CONECTAR PARA REGENERAR</span><h1>Todo resíduo merece<br />um <em>novo começo.</em></h1><p>Conectamos quem gera a quem transforma.<br className="desktop-break" /> Mais valor para os materiais. Mais futuro para o planeta.</p><div className="hero-actions"><Button asChild className="hero-primary"><Link to="/catalogo">Encontrar resíduos <ArrowUpRight size={18} /></Link></Button><Button variant="outline" className="hero-secondary" onClick={() => setAnnounce(true)}>Quero anunciar <ArrowUpRight size={18} /></Button></div><div className="hero-proof"><span className="proof-avatars"><span>JM</span><span>AC</span><span>RS</span></span><span>Empresas e cooperativas, juntas por um novo ciclo.</span></div></div><div className="hero-note"><span className="hero-note-icon"><Recycle size={26} /></span><div>O futuro não é descartável.<strong>É circular.</strong></div><MoveUpRight size={20} /></div></div></section>
+    <section className="impact-section"><div className="container impact-inner"><div className="impact-intro"><span className="eyebrow">PEQUENAS CONEXÕES.</span><h2>Grandes transformações.</h2><span className="impact-demo">Um retrato ilustrativo do nosso potencial</span></div><div className="impact-stat"><Recycle /><div><strong>2.450<span> t</span></strong><p>de resíduos com novo destino</p></div></div><div className="impact-stat"><Factory /><div><strong>180<span>+</span></strong><p>empresas conectadas</p></div></div><div className="impact-stat"><Sprout /><div><strong>1.820<span> t</span></strong><p>de CO₂ potencialmente evitadas</p></div></div></div></section>
+    <section className="container categories-section"><div className="section-heading"><div><span className="eyebrow">MATÉRIA-PRIMA PARA NOVAS POSSIBILIDADES</span><h2>Qual material você procura?</h2></div><SectionLink>Explorar todos</SectionLink></div><div className="category-grid">{categories.map((category,i) => { const Icon = categoryIcons[i]; return <Link to="/catalogo" search={{ categoria: category }} className="category-item" key={category}>{Icon && <Icon size={27} strokeWidth={1.45} />}<span>{category}</span><span className="category-count">{lots.filter(l => l.category === category).length} {lots.filter(l => l.category === category).length === 1 ? 'lote' : 'lotes'}</span></Link> })}</div></section>
+    <section className="opportunities-section"><div className="container"><div className="section-heading"><div><span className="eyebrow"><span className="live-dot" />DA ORIGEM AO PRÓXIMO CICLO</span><h2>Resíduos que viram oportunidades.</h2><p>Materiais disponíveis, conexões com propósito.</p></div><SectionLink>Ver todos os resíduos</SectionLink></div><div className="lots-grid">{lots.slice(0,4).map(lot => <LotCard lot={lot} key={lot.id} />)}</div><div className="opportunity-foot"><span><Leaf size={15} />Um material reaproveitado. Um futuro preservado.</span><span>Lotes demonstrativos · Valores estimados</span></div></div></section>
+    <section className="container purpose-section"><div className="purpose-symbol"><Recycle size={62} strokeWidth={1.2} /></div><div><span className="eyebrow">MENOS DESCARTE. MAIS POSSIBILIDADES.</span><h2>O que sobra para um,<br />é o começo para outro.</h2></div><div><p>Da indústria à cooperativa, conectamos quem acredita que o desenvolvimento e o cuidado com o planeta andam juntos.</p><Button asChild variant="link" className="purpose-link"><Link to="/como-funciona">Conheça esse movimento <ArrowRight size={17} /></Link></Button></div></section>
+    <section className="join-section"><div className="container join-inner"><div><span className="eyebrow">FAÇA PARTE DA TRANSFORMAÇÃO</span><h2>Seu resíduo tem valor.<br />Vamos encontrar o próximo destino?</h2></div><div className="join-actions"><Button onClick={() => setAnnounce(true)}>Anunciar meu resíduo <ArrowUpRight size={17} /></Button><span>Novas conexões. Novas possibilidades.</span></div></div></section><ActionDialog open={announce} onOpenChange={setAnnounce} />
+  </main>
 }
