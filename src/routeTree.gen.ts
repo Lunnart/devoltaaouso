@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CatalogoRouteImport } from './routes/catalogo'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
+import { Route as DuvidasRouteImport } from './routes/duvidas'
 import { Route as LotesIdRouteImport } from './routes/lotes.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
   path: '/como-funciona',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DuvidasRoute = DuvidasRouteImport.update({
+  id: '/duvidas',
+  path: '/duvidas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LotesIdRoute = LotesIdRouteImport.update({
   id: '/lotes/$id',
   path: '/lotes/$id',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/duvidas': typeof DuvidasRoute
   '/lotes/$id': typeof LotesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/duvidas': typeof DuvidasRoute
   '/lotes/$id': typeof LotesIdRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,28 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/duvidas': typeof DuvidasRoute
   '/lotes/$id': typeof LotesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/catalogo' | '/como-funciona' | '/lotes/$id'
+  fullPaths: '/' | '/catalogo' | '/como-funciona' | '/duvidas' | '/lotes/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/catalogo' | '/como-funciona' | '/lotes/$id'
-  id: '__root__' | '/' | '/catalogo' | '/como-funciona' | '/lotes/$id'
+  to: '/' | '/catalogo' | '/como-funciona' | '/duvidas' | '/lotes/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/catalogo'
+    | '/como-funciona'
+    | '/duvidas'
+    | '/lotes/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CatalogoRoute: typeof CatalogoRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
+  DuvidasRoute: typeof DuvidasRoute
   LotesIdRoute: typeof LotesIdRoute
 }
 
@@ -92,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComoFuncionaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/duvidas': {
+      id: '/duvidas'
+      path: '/duvidas'
+      fullPath: '/duvidas'
+      preLoaderRoute: typeof DuvidasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lotes/$id': {
       id: '/lotes/$id'
       path: '/lotes/$id'
@@ -106,6 +129,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CatalogoRoute: CatalogoRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
+  DuvidasRoute: DuvidasRoute,
   LotesIdRoute: LotesIdRoute,
 }
 export const routeTree = rootRouteImport
