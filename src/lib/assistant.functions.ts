@@ -2,7 +2,18 @@ import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 import { approvedFaq } from './faq'
 
-export type AssistantReply = { answered: boolean; answer: string; error?: string }
+export type AssistantReply = { answered: boolean; answer: string; error?: string; forwarded?: boolean }
+
+async function forwardToTeam(question: string, note: string) {
+  try {
+    const { appendRow, nowInSaoPaulo } = await import('./sheets.server')
+    await appendRow('Dúvidas', [nowInSaoPaulo(), question, note, 'Aguardando equipe'])
+    return true
+  } catch (e) {
+    console.error('forwardToTeam error', e)
+    return false
+  }
+}
 
 export const askAssistant = createServerFn({ method: 'POST' })
   .inputValidator((d) => z.object({ question: z.string().trim().min(3).max(500) }).parse(d))
@@ -17,10 +28,10 @@ export const askAssistant = createServerFn({ method: 'POST' })
       })
       const text = res.output.flatMap((o) => (o.type === 'message' ? o.content : [])).map((c) => (c.type === 'output_text' ? c.text : '')).join('')
       const parsed = z.object({ answered: z.boolean(), answer: z.string() }).safeParse(JSON.parse(text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1)))
-      if (!parsed.success || !parsed.data.answered) return { answered: false, answer: '' }
+      if (!parsed.success || !parsed.data.answered) return { answered: false, answer: '', forwarded: await forwardToTeam(data.question, 'Sem resposta aprovada') }
       return parsed.data
     } catch (e) {
       console.error('assistant error', e instanceof GatewayError ? e.code : e)
-      return { answered: false, answer: '', error: 'O assistente está indisponível no momento.' }
+      return { answered: false, answer: '', error: 'O assistente está indisponível no momento.', forwarded: await forwardToTeam(data.question, 'Assistente indisponível') }
     }
   })
