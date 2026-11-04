@@ -1,6 +1,6 @@
 // Conteúdo aprovado: o assistente responde SOMENTE com base nestes itens.
 // Rascunho inicial — a revisar pela equipe antes da versão final.
-export const TEAM_EMAIL = 'contato@circular.exemplo'
+export const TEAM_EMAIL = 'luannygadelha@gmail.com'
 
 export const approvedFaq: { q: string; a: string }[] = [
   { q: 'O que é a Circular?', a: 'A Circular é um marketplace de resíduos e economia circular que conecta empresas geradoras de resíduos a recicladores e cooperativas.' },
