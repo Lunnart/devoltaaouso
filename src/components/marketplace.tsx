@@ -4,11 +4,28 @@ import { ArrowDownLeft, ArrowUpRight, ArrowRight, Recycle, Menu, X, MapPin, Weig
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { formatPrice, type Lot } from '@/lib/marketplace'
+import { useServerFn } from '@tanstack/react-start'
+import { submitContact } from '@/lib/contact.functions'
+import { LIMITS } from '@/lib/contact'
 
 export function ActionDialog({ open, onOpenChange, lot }: { open: boolean; onOpenChange: (value: boolean) => void; lot?: Lot }) {
+  const send = useServerFn(submitContact)
   const [sent, setSent] = useState(false)
-  function submit(event: FormEvent) { event.preventDefault(); setSent(true) }
-  return <Dialog open={open} onOpenChange={value => { onOpenChange(value); setSent(false) }}><DialogContent className="max-h-[90dvh] overflow-y-auto rounded-lg"><div className="dialog-icon"><Leaf size={25} /></div><DialogTitle>{sent ? 'Tudo pronto para um novo ciclo.' : lot ? 'Vamos conectar essa oportunidade?' : 'Dê um novo destino aos seus resíduos.'}</DialogTitle><DialogDescription>{sent ? 'Esta foi uma simulação. Nenhuma proposta ou informação foi enviada ou armazenada.' : lot ? `Interesse no lote: ${lot.title}` : 'Conte um pouco sobre sua empresa e o material que deseja anunciar.'}</DialogDescription>{!sent ? <form onSubmit={submit} className="contact-form"><label>Seu nome<input required name="name" placeholder="Nome e sobrenome" /></label><label>E-mail profissional<input required type="email" name="email" placeholder="voce@empresa.com.br" /></label><label>Empresa ou cooperativa<input required name="company" placeholder="Nome da organização" /></label><label>{lot ? 'Sua proposta' : 'Sobre o material'}<textarea required rows={3} name="message" placeholder={lot ? 'Conte o volume desejado, valor e condições de coleta…' : 'Tipo de resíduo, quantidade e cidade…'} /></label><p className="demo-note">Ambiente demonstrativo. Não há envio real de mensagens nesta etapa.</p><Button type="submit" className="h-11 w-full"><Send size={16} />{lot ? 'Simular envio de proposta' : 'Simular anúncio'}</Button></form> : <><div className="success-check"><Check size={32} /></div><Button onClick={() => onOpenChange(false)}>Concluir</Button></>}</DialogContent></Dialog>
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (sending) return
+    const f = new FormData(event.currentTarget)
+    const get = (k: string) => String(f.get(k) ?? '')
+    setSending(true); setError('')
+    try {
+      const res = await send({ data: { lotId: lot?.id, name: get('name'), email: get('email'), company: get('company'), message: get('message'), consent: f.get('consent') === 'on', website: get('website') } })
+      if (res.ok) setSent(true); else setError(res.error ?? 'Não foi possível enviar agora.')
+    } catch { setError('Confira os campos e tente novamente.') }
+    finally { setSending(false) }
+  }
+  return <Dialog open={open} onOpenChange={value => { onOpenChange(value); setSent(false); setError('') }}><DialogContent className="max-h-[90dvh] overflow-y-auto rounded-lg"><div className="dialog-icon"><Leaf size={25} /></div><DialogTitle>{sent ? 'Tudo pronto para um novo ciclo.' : lot ? 'Vamos conectar essa oportunidade?' : 'Dê um novo destino aos seus resíduos.'}</DialogTitle><DialogDescription>{sent ? (lot ? 'Proposta recebida! Nossa equipe vai analisar e entrar em contato pelo e-mail informado.' : 'Anúncio recebido! Nossa equipe vai revisar o material e entrar em contato pelo e-mail informado.') : lot ? `Interesse no lote: ${lot.title}` : 'Conte um pouco sobre sua empresa e o material que deseja anunciar.'}</DialogDescription>{!sent ? <form onSubmit={submit} className="contact-form"><label>Seu nome<input required minLength={2} maxLength={LIMITS.name} name="name" placeholder="Nome e sobrenome" /></label><label>E-mail profissional<input required type="email" maxLength={LIMITS.email} name="email" placeholder="voce@empresa.com.br" /></label><label>Empresa ou cooperativa<input required minLength={2} maxLength={LIMITS.company} name="company" placeholder="Nome da organização" /></label><label>{lot ? 'Sua proposta' : 'Sobre o material'}<textarea required minLength={5} maxLength={LIMITS.message} rows={3} name="message" placeholder={lot ? 'Conte o volume desejado, valor e condições de coleta…' : 'Tipo de resíduo, quantidade e cidade…'} /></label><input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1 }} /><label style={{ flexDirection: 'row', alignItems: 'flex-start', fontWeight: 400 }}><input required type="checkbox" name="consent" style={{ marginTop: 3 }} />Autorizo a Circular a guardar estes dados para responder ao meu contato.</label><p className="demo-note">Os lotes exibidos ainda são demonstrativos. Seu contato é recebido pela equipe Circular.</p>{error && <p role="alert" className="text-destructive" style={{ fontSize: 12 }}>{error}</p>}<Button type="submit" disabled={sending} className="h-11 w-full"><Send size={16} />{sending ? 'Enviando…' : lot ? 'Enviar proposta' : 'Enviar anúncio'}</Button></form> : <><div className="success-check"><Check size={32} /></div><Button onClick={() => onOpenChange(false)}>Concluir</Button></>}</DialogContent></Dialog>
 }
 
 export function Header() {

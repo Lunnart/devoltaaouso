@@ -42,13 +42,14 @@ function Duvidas() {
       <form onSubmit={submit} style={{ display: 'grid', gap: 12 }}>
         <label htmlFor="q" style={{ fontWeight: 600 }}>Descreva sua dúvida</label>
         <textarea id="q" value={question} onChange={(e) => setQuestion(e.target.value)} maxLength={500} rows={4} placeholder="Ex.: Como envio uma proposta para um lote?" className="rounded-md border border-input bg-background p-3" />
+        <small className="text-muted-foreground">Não inclua dados pessoais. Perguntas sem resposta ficam registradas para a equipe responder.</small>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}><small className="text-muted-foreground">{question.length}/500</small><Button type="submit" disabled={loading || question.trim().length < 3}>{loading ? 'Pensando…' : 'Perguntar'} <Send size={16} /></Button></div>
       </form>
       {reply && <div className="rounded-md border border-border bg-card p-5" style={{ marginTop: 24 }} aria-live="polite">
         {reply.answered ? <><p style={{ display: 'flex', gap: 8, fontWeight: 600 }}><Bot size={20} /> Resposta</p><p style={{ marginTop: 8 }}>{reply.answer}</p></> : <>
           <p style={{ fontWeight: 600 }}>{reply.error ?? 'Ainda não temos uma resposta aprovada para essa pergunta.'}</p>
-          <p className="text-muted-foreground" style={{ marginTop: 8 }}>Encaminhe sua dúvida para a nossa equipe — sua pergunta já vai preenchida no e-mail.</p>
-          <Button asChild variant="outline" style={{ marginTop: 12 }}><a href={mailto}>Enviar para a equipe <Mail size={16} /></a></Button>
+          <p className="text-muted-foreground" style={{ marginTop: 8 }}>{reply.forwarded ? 'Sua pergunta foi registrada e encaminhada para a nossa equipe. Se quiser receber a resposta, envie também por e-mail — sua pergunta já vai preenchida.' : 'Encaminhe sua dúvida para a nossa equipe — sua pergunta já vai preenchida no e-mail.'}</p>
+          <Button asChild variant="outline" style={{ marginTop: 12 }}><a href={mailto}>{reply.forwarded ? 'Receber resposta por e-mail' : 'Enviar para a equipe'} <Mail size={16} /></a></Button>
         </>}
       </div>}
       <h2 style={{ marginTop: 48, fontSize: 22, fontWeight: 700 }}>Perguntas frequentes</h2>

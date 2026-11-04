@@ -11,5 +11,7 @@
 
 ## Application architecture
 - Use the root route for the shared marketplace header and footer so all content pages keep consistent navigation.
-- Keep demonstration lot data and pure filtering in `src/lib/marketplace.ts`; this stage is frontend-only and must never imply a real proposal was sent.
+- Keep demonstration lot data and pure filtering in `src/lib/marketplace.ts`; lots stay fictional and labeled as such.
+- Store proposals, listings and unanswered questions as rows in the team's Google Sheet via `src/lib/sheets.server.ts` (gateway, RAW input), called only from server functions; no database yet, so the sheet is the team inbox.
+- Validate contact forms with the shared schema in `src/lib/contact.ts` on both browser and server so limits never drift.
 - Use dedicated catalog, lot-detail, and how-it-works routes, with route-level social metadata for independent navigation and sharing.
