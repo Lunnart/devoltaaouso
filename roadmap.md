@@ -6,3 +6,4 @@
 # Planilha da equipe
 - [x] Gravar propostas, anúncios e dúvidas sem resposta na planilha Google.
 - [x] Limitar tamanho dos campos, pedir autorização de uso dos dados e bloquear robôs simples.
+- [x] Telas de login/cadastro (e-mail, Google, Lovable) + luanny como primeira administradora
