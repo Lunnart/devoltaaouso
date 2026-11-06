@@ -14,16 +14,203 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      hubs: {
+        Row: {
+          address: string | null
+          city: string
+          code: string
+          created_at: string
+          id: string
+          name: string
+          state: string
+          status: string
+        }
+        Insert: {
+          address?: string | null
+          city: string
+          code: string
+          created_at?: string
+          id?: string
+          name: string
+          state: string
+          status?: string
+        }
+        Update: {
+          address?: string | null
+          city?: string
+          code?: string
+          created_at?: string
+          id?: string
+          name?: string
+          state?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      material_prices: {
+        Row: {
+          buy_price_per_kg: number
+          created_at: string
+          created_by: string | null
+          hub_id: string
+          id: string
+          material_id: string
+          valid_from: string
+          valid_to: string | null
+        }
+        Insert: {
+          buy_price_per_kg: number
+          created_at?: string
+          created_by?: string | null
+          hub_id: string
+          id?: string
+          material_id: string
+          valid_from?: string
+          valid_to?: string | null
+        }
+        Update: {
+          buy_price_per_kg?: number
+          created_at?: string
+          created_by?: string | null
+          hub_id?: string
+          id?: string
+          material_id?: string
+          valid_from?: string
+          valid_to?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "material_prices_hub_id_fkey"
+            columns: ["hub_id"]
+            isOneToOne: false
+            referencedRelation: "hubs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "material_prices_material_id_fkey"
+            columns: ["material_id"]
+            isOneToOne: false
+            referencedRelation: "materials"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      materials: {
+        Row: {
+          active: boolean
+          category: string
+          code: string
+          created_at: string
+          id: string
+          name: string
+          unit: string
+        }
+        Insert: {
+          active?: boolean
+          category: string
+          code: string
+          created_at?: string
+          id?: string
+          name: string
+          unit?: string
+        }
+        Update: {
+          active?: boolean
+          category?: string
+          code?: string
+          created_at?: string
+          id?: string
+          name?: string
+          unit?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          document: string | null
+          full_name: string | null
+          hub_id: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          document?: string | null
+          full_name?: string | null
+          hub_id?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          document?: string | null
+          full_name?: string | null
+          hub_id?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_hub_id_fkey"
+            columns: ["hub_id"]
+            isOneToOne: false
+            referencedRelation: "hubs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          hub_id: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          hub_id?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          hub_id?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_hub_id_fkey"
+            columns: ["hub_id"]
+            isOneToOne: false
+            referencedRelation: "hubs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      manages_hub: {
+        Args: { _hub_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "gestor_hub" | "operador" | "participante" | "empresa"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +337,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "gestor_hub", "operador", "participante", "empresa"],
+    },
   },
 } as const
