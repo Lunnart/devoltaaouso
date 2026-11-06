@@ -15,3 +15,5 @@
 - Store proposals, listings and unanswered questions as rows in the team's Google Sheet via `src/lib/sheets.server.ts` (gateway, RAW input), called only from server functions; no database yet, so the sheet is the team inbox.
 - Validate contact forms with the shared schema in `src/lib/contact.ts` on both browser and server so limits never drift.
 - Use dedicated catalog, lot-detail, and how-it-works routes, with route-level social metadata for independent navigation and sharing.
+- Roles live only in `public.user_roles` (checked via `has_role`/`manages_hub` security-definer functions); never on profiles, to prevent privilege escalation.
+- Weights use numeric(12,3) and money numeric(12,2); never floats, so financial math stays exact.
