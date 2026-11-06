@@ -10,14 +10,27 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CatalogoRouteImport } from './routes/catalogo'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as DuvidasRouteImport } from './routes/duvidas'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedContaRouteImport } from './routes/_authenticated/conta'
 import { Route as LotesIdRouteImport } from './routes/lotes.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogoRoute = CatalogoRouteImport.update({
@@ -35,6 +48,16 @@ const DuvidasRoute = DuvidasRouteImport.update({
   path: '/duvidas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedContaRoute = AuthenticatedContaRouteImport.update({
+  id: '/conta',
+  path: '/conta',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const LotesIdRoute = LotesIdRouteImport.update({
   id: '/lotes/$id',
   path: '/lotes/$id',
@@ -43,45 +66,78 @@ const LotesIdRoute = LotesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/duvidas': typeof DuvidasRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/conta': typeof AuthenticatedContaRoute
   '/lotes/$id': typeof LotesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/duvidas': typeof DuvidasRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/conta': typeof AuthenticatedContaRoute
   '/lotes/$id': typeof LotesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/duvidas': typeof DuvidasRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/conta': typeof AuthenticatedContaRoute
   '/lotes/$id': typeof LotesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/catalogo' | '/como-funciona' | '/duvidas' | '/lotes/$id'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/catalogo' | '/como-funciona' | '/duvidas' | '/lotes/$id'
-  id:
-    | '__root__'
+  fullPaths:
     | '/'
+    | '/auth'
     | '/catalogo'
     | '/como-funciona'
     | '/duvidas'
+    | '/reset-password'
+    | '/conta'
+    | '/lotes/$id'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/auth'
+    | '/catalogo'
+    | '/como-funciona'
+    | '/duvidas'
+    | '/reset-password'
+    | '/conta'
+    | '/lotes/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/catalogo'
+    | '/como-funciona'
+    | '/duvidas'
+    | '/reset-password'
+    | '/_authenticated/conta'
     | '/lotes/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   CatalogoRoute: typeof CatalogoRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
   DuvidasRoute: typeof DuvidasRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   LotesIdRoute: typeof LotesIdRoute
 }
 
@@ -92,6 +148,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/catalogo': {
@@ -115,6 +185,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DuvidasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/conta': {
+      id: '/_authenticated/conta'
+      path: '/conta'
+      fullPath: '/conta'
+      preLoaderRoute: typeof AuthenticatedContaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/lotes/$id': {
       id: '/lotes/$id'
       path: '/lotes/$id'
@@ -125,11 +209,25 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedContaRoute: typeof AuthenticatedContaRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedContaRoute: AuthenticatedContaRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   CatalogoRoute: CatalogoRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
   DuvidasRoute: DuvidasRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   LotesIdRoute: LotesIdRoute,
 }
 export const routeTree = rootRouteImport
