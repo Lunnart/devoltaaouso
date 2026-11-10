@@ -50,33 +50,66 @@ export type Database = {
       material_prices: {
         Row: {
           buy_price_per_kg: number
+          city: string
+          consulted_at: string | null
           created_at: string
           created_by: string | null
+          currency: string
           hub_id: string
           id: string
           material_id: string
+          notes: string | null
+          price_type: string
+          reference_date: string | null
+          source_item: string | null
+          source_name: string | null
+          source_url: string | null
+          state: string
           valid_from: string
           valid_to: string | null
+          verification_status: string
         }
         Insert: {
           buy_price_per_kg: number
+          city?: string
+          consulted_at?: string | null
           created_at?: string
           created_by?: string | null
+          currency?: string
           hub_id: string
           id?: string
           material_id: string
+          notes?: string | null
+          price_type?: string
+          reference_date?: string | null
+          source_item?: string | null
+          source_name?: string | null
+          source_url?: string | null
+          state?: string
           valid_from?: string
           valid_to?: string | null
+          verification_status?: string
         }
         Update: {
           buy_price_per_kg?: number
+          city?: string
+          consulted_at?: string | null
           created_at?: string
           created_by?: string | null
+          currency?: string
           hub_id?: string
           id?: string
           material_id?: string
+          notes?: string | null
+          price_type?: string
+          reference_date?: string | null
+          source_item?: string | null
+          source_name?: string | null
+          source_url?: string | null
+          state?: string
           valid_from?: string
           valid_to?: string | null
+          verification_status?: string
         }
         Relationships: [
           {
