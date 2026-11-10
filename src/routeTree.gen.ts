@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CatalogoRouteImport } from './routes/catalogo'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as DuvidasRouteImport } from './routes/duvidas'
+import { Route as PrecosRouteImport } from './routes/precos'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedContaRouteImport } from './routes/_authenticated/conta'
 import { Route as LotesIdRouteImport } from './routes/lotes.$id'
@@ -48,6 +49,11 @@ const DuvidasRoute = DuvidasRouteImport.update({
   path: '/duvidas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrecosRoute = PrecosRouteImport.update({
+  id: '/precos',
+  path: '/precos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
   id: '/reset-password',
   path: '/reset-password',
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/duvidas': typeof DuvidasRoute
+  '/precos': typeof PrecosRoute
   '/reset-password': typeof ResetPasswordRoute
   '/conta': typeof AuthenticatedContaRoute
   '/lotes/$id': typeof LotesIdRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/duvidas': typeof DuvidasRoute
+  '/precos': typeof PrecosRoute
   '/reset-password': typeof ResetPasswordRoute
   '/conta': typeof AuthenticatedContaRoute
   '/lotes/$id': typeof LotesIdRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/catalogo': typeof CatalogoRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/duvidas': typeof DuvidasRoute
+  '/precos': typeof PrecosRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/conta': typeof AuthenticatedContaRoute
   '/lotes/$id': typeof LotesIdRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/como-funciona'
     | '/duvidas'
+    | '/precos'
     | '/reset-password'
     | '/conta'
     | '/lotes/$id'
@@ -114,6 +124,7 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/como-funciona'
     | '/duvidas'
+    | '/precos'
     | '/reset-password'
     | '/conta'
     | '/lotes/$id'
@@ -125,6 +136,7 @@ export interface FileRouteTypes {
     | '/catalogo'
     | '/como-funciona'
     | '/duvidas'
+    | '/precos'
     | '/reset-password'
     | '/_authenticated/conta'
     | '/lotes/$id'
@@ -137,6 +149,7 @@ export interface RootRouteChildren {
   CatalogoRoute: typeof CatalogoRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
   DuvidasRoute: typeof DuvidasRoute
+  PrecosRoute: typeof PrecosRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   LotesIdRoute: typeof LotesIdRoute
 }
@@ -185,6 +198,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DuvidasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/precos': {
+      id: '/precos'
+      path: '/precos'
+      fullPath: '/precos'
+      preLoaderRoute: typeof PrecosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
@@ -227,6 +247,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogoRoute: CatalogoRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
   DuvidasRoute: DuvidasRoute,
+  PrecosRoute: PrecosRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   LotesIdRoute: LotesIdRoute,
 }
