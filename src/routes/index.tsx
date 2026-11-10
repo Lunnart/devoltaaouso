@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState } from 'react'
-import { ArrowUpRight, ArrowRight, Leaf, Recycle, Factory, Sprout, Search, MapPin, ChevronDown, Milk, ScrollText, Cog, Layers, Cpu, Shirt, Wine, MoveUpRight } from 'lucide-react'
+import { ArrowUpRight, ArrowRight, Leaf, Recycle, Factory, Sprout, Search, MapPin, ChevronDown, Milk, ScrollText, Cog, Layers, Cpu, Wine, MoveUpRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ActionDialog, LotCard, SectionLink } from '@/components/marketplace'
 import { categories, lots } from '@/lib/marketplace'
@@ -10,7 +10,7 @@ export const Route = createFileRoute('/')({
   head: () => ({ meta: [{ title: 'Circular — Resíduos que conectam. Recursos que transformam.' }, { name: 'description', content: 'Conectamos empresas geradoras de resíduos a recicladores e cooperativas. Descubra oportunidades para uma economia mais circular.' }, { property: 'og:title', content: 'Circular — Todo resíduo merece um novo começo.' }, { property: 'og:description', content: 'O que sobra para um pode ser o começo para outro. Encontre e ofereça materiais recicláveis no Brasil.' }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }),
   component: Index,
 })
-const categoryIcons = [Milk, ScrollText, Cog, Layers, Cpu, Shirt, Wine]
+const categoryIcons = [Cog, Layers, ScrollText, Milk, Wine, Cpu]
 function Index() {
   const [announce, setAnnounce] = useState(false)
   return <main>
