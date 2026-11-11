@@ -17,3 +17,4 @@
 - Use dedicated catalog, lot-detail, and how-it-works routes, with route-level social metadata for independent navigation and sharing.
 - Roles live only in `public.user_roles` (checked via `has_role`/`manages_hub` security-definer functions); never on profiles, to prevent privilege escalation.
 - Weights use numeric(12,3) and money numeric(12,2); never floats, so financial math stays exact.
+- Material prices live only in `material_prices` with source, date, price type and verification; never invent prices — no verifiable source means "cotação pendente". Retired materials are deactivated, never deleted, to keep history.
