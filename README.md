@@ -10,7 +10,7 @@ Site no ar: **https://devoltaaouso.lovable.app** (interface ainda com a marca pr
 1. [Apresentação](#apresentação) · 2. [Visão de negócio](#visão-de-negócio) · 3. [Funcionalidades](#funcionalidades) · 4. [Arquitetura](#arquitetura) · 5. [Banco de dados](#banco-de-dados) · 6. [Indicadores de impacto](#indicadores-de-impacto) · 7. [Relevância profissional](#relevância-profissional) · 8. [Instalação](#instalação-e-execução) · 9. [Roadmap](#roadmap) · 10. [Contribuição](#licença-e-contribuição)
 
 ## Apresentação
-**Problema:** grande parte dos recicláveis termina em aterros porque quem gera não encontra comprador, e quem compra não tem acesso a material confiável e rastreável.
+**Problema:** grande parte dos recicláveis termina em aterros porque quem gera não sabe como destiná-los corretamente, e quem compra não tem acesso a material confiável e rastreável.
 
 **Proposta de valor:** um ponto único para anunciar lotes, consultar preços de referência **com fonte e data**, e enviar propostas — com regras explícitas contra preços inventados.
 
