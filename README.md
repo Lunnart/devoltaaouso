@@ -14,7 +14,7 @@ Site no ar: **https://devoltaaouso.lovable.app** (interface ainda com a marca pr
 
 **Proposta de valor:** um ponto único para anunciar lotes, consultar preços de referência **com fonte e data**, e enviar propostas — com regras explícitas.
 
-**Diferenciais:** preços rastreáveis (fonte, URL, data, tipo, verificação) · foco regional no Ceará · catálogo restrito a materiais autorizados · assistente de dúvidas que responde só com conteúdo aprovado.
+**Diferenciais:** preços rastreáveis (fonte, URL, data, tipo, verificação) · foco inicial: regional no Ceará · catálogo restrito a materiais autorizados · assistente de dúvidas que responde só com conteúdo aprovado.
 
 ## Visão de negócio
 ```mermaid
