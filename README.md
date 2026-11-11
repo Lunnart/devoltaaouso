@@ -31,7 +31,6 @@ flowchart LR
 ### Materiais autorizados
 Alumínio · Latinhas de alumínio · Ferro · Aço · Papelão · Papel branco · Plástico PET · Vidro (embalagens inteiras) · Resíduos eletroeletrônicos (inclui baterias e pilhas).
 
-**Não aceitos:** cobre, papel misto, plástico PP, plástico PEAD, metais diversos, cacos de vidro.
 
 ## Funcionalidades
 ### ✅ Implementadas
