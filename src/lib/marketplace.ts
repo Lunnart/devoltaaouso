@@ -5,11 +5,12 @@ import eletronicos from '@/assets/eletronicos.jpg'
 import vidro from '@/assets/vidro.jpg'
 import baterias from '@/assets/baterias.jpg'
 import latinhas from '@/assets/latinhas.jpg'
+import garrafasPet from '@/assets/garrafas-pet.jpg'
 
 export const categories = ['Alumínio', 'Ferro e Aço', 'Papel e Papelão', 'Plástico PET', 'Vidro', 'Eletroeletrônicos'] as const
 export const cities = ['Fortaleza', 'Caucaia', 'Maracanaú'] as const
 export const lots = [
-  { id: 'pet-prensado', title: 'Garrafas PET prensadas', category: 'Plástico PET', image: plasticos, city: 'Fortaleza', state: 'CE', weight: '5 toneladas/mês', recurring: true, price: null as number | null, unit: '', company: 'Gerador demonstrativo A', description: 'Garrafas PET pós-consumo, transparentes e azul-claro, separadas e prensadas em fardos. Material seco, armazenado em galpão coberto.' },
+  { id: 'pet-prensado', title: 'Garrafas PET', category: 'Plástico PET', image: garrafasPet, city: 'Fortaleza', state: 'CE', weight: '5 toneladas/mês', recurring: true, price: null as number | null, unit: '', company: 'Gerador demonstrativo A', description: 'Garrafas PET pós-consumo, inteiras, vazias e limpas, transparentes e azul-claro, separadas na origem. Material seco, armazenado em galpão coberto.' },
   { id: 'papelao-ondulado', title: 'Papelão ondulado enfardado', category: 'Papel e Papelão', image: papel, city: 'Maracanaú', state: 'CE', weight: '8 toneladas/mês', recurring: true, price: null as number | null, unit: '', company: 'Gerador demonstrativo B', description: 'Papelão ondulado de centro de distribuição, sem umidade e separado na origem. Fardos de aproximadamente 300 kg.' },
   { id: 'aluminio-industrial', title: 'Sucata de alumínio industrial', category: 'Alumínio', image: metal, city: 'Fortaleza', state: 'CE', weight: '2,5 toneladas', recurring: false, price: null as number | null, unit: '', company: 'Gerador demonstrativo C', description: 'Retalhos e perfis de alumínio de usinagem, segregados e sem mistura com metais ferrosos. Lote único.' },
   { id: 'latinhas-aluminio', title: 'Latinhas de alumínio', category: 'Alumínio', image: latinhas, city: 'Caucaia', state: 'CE', weight: '800 kg/mês', recurring: true, price: null as number | null, unit: '', company: 'Gerador demonstrativo D', description: 'Latas de bebida pós-consumo, separadas e sem outros resíduos. Coleta mensal a combinar.' },
