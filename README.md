@@ -12,7 +12,7 @@ Site no ar: **https://devoltaaouso.lovable.app** (interface ainda com a marca pr
 ## Apresentação
 **Problema:** grande parte dos recicláveis termina em aterros porque quem gera não sabe como destiná-los corretamente, e quem compra não tem acesso a material confiável e rastreável.
 
-**Proposta de valor:** um ponto único para anunciar lotes, consultar preços de referência **com fonte e data**, e enviar propostas — com regras explícitas contra preços inventados.
+**Proposta de valor:** um ponto único para anunciar lotes, consultar preços de referência **com fonte e data**, e enviar propostas — com regras explícitas.
 
 **Diferenciais:** preços rastreáveis (fonte, URL, data, tipo, verificação) · foco regional no Ceará · catálogo restrito a materiais autorizados · assistente de dúvidas que responde só com conteúdo aprovado.
 
