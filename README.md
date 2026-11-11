@@ -29,7 +29,7 @@ flowchart LR
 - **Poder público:** fortalece a gestão de resíduos e os resultados ambientais.
 
 ### Materiais autorizados
-Alumínio · Latinhas de alumínio · Ferro · Aço · Papelão · Papel branco · Plástico PET · Vidro (embalagens inteiras) · Resíduos eletroeletrônicos (inclui baterias e pilhas).
+Alumínio · Latinhas de alumínio · Ferro · Aço · Papelão · Papel · Garrafa PET · Vidro (embalagens inteiras) · Resíduos eletroeletrônicos (inclui baterias e pilhas).
 
 
 ## Funcionalidades
