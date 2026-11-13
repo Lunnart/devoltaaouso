@@ -4,8 +4,8 @@ import { homedir } from 'node:os'
 import { join } from 'node:path'
 
 // Live checks against the backend's access rules for materials.
-const URL = process.env.VITE_SUPABASE_URL
-const KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY
+const URL = process.env['VITE_SUPABASE_URL']
+const KEY = process.env['VITE_SUPABASE_PUBLISHABLE_KEY']
 const SESSION = join(homedir(), '.cache/lovable-auth/session.json')
 const RETIRED = ['PEAD', 'MADEIRA', 'TEXTIL']
 
