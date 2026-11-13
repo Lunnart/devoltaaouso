@@ -1,0 +1,2 @@
+DROP POLICY IF EXISTS "Materiais são públicos" ON public.materials;
+CREATE POLICY "Materiais ativos são públicos" ON public.materials FOR SELECT TO anon, authenticated USING (active = true OR public.has_role(auth.uid(), 'admin'::app_role));
