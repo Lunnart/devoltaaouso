@@ -6,6 +6,8 @@ import ferroAco from '@/assets/ferro-aco.jpg'
 import garrafasPetReal from '@/assets/garrafas-pet-real.jpg'
 import vidro from '@/assets/vidro.jpg'
 import baterias from '@/assets/baterias.jpg'
+import papelTriturado from '@/assets/papel-triturado.jpg'
+import papelA4 from '@/assets/papel-a4-cadernos.jpg'
 import latinhas from '@/assets/latinhas.jpg'
 import garrafasPet from '@/assets/garrafas-pet.jpg'
 import petTransparentes from '@/assets/pet-transparentes.jpg'
@@ -15,7 +17,7 @@ export const categories = ['Alumínio', 'Ferro e Aço', 'Papel e Papelão', 'Pl�
 export const cities = ['Fortaleza', 'Caucaia', 'Maracanaú'] as const
 export const lots = [
   { id: 'pet-prensado', title: 'Garrafas PET', category: 'Plástico PET', image: garrafasPetReal, gallery: [garrafasPetReal, petTransparentes, petColoridas] as string[], city: 'Fortaleza', state: 'CE', weight: '5 toneladas/mês', recurring: true, price: null as number | null, unit: '', company: 'Gerador demonstrativo A', description: 'Garrafas PET pós-consumo, inteiras, vazias e limpas, transparentes, azul-claro e verdes, separadas na origem. Material seco, armazenado em galpão coberto.' },
-  { id: 'papelao-ondulado', title: 'Papelão e Papéis', category: 'Papel e Papelão', image: papel, gallery: [] as string[], city: 'Maracanaú', state: 'CE', weight: '8 toneladas/mês', recurring: true, price: null as number | null, unit: '', company: 'Gerador demonstrativo B', description: 'Papelão ondulado de centro de distribuição, sem umidade e separado na origem. Fardos de aproximadamente 300 kg.' },
+  { id: 'papelao-ondulado', title: 'Papelão e Papéis', category: 'Papel e Papelão', image: papel, gallery: [papel, papelTriturado, papelA4] as string[], city: 'Maracanaú', state: 'CE', weight: '8 toneladas/mês', recurring: true, price: null as number | null, unit: '', company: 'Gerador demonstrativo B', description: 'Papelão ondulado em fardos de aproximadamente 300 kg, notas fiscais e documentos triturados, papel A4, cadernos e revistas usados. Material seco e separado na origem.' },
   { id: 'aluminio-industrial', title: 'Sucata de alumínio industrial', category: 'Alumínio', image: metal, gallery: [] as string[], city: 'Fortaleza', state: 'CE', weight: '2,5 toneladas', recurring: false, price: null as number | null, unit: '', company: 'Gerador demonstrativo C', description: 'Retalhos e perfis de alumínio de usinagem, segregados e sem mistura com metais ferrosos. Lote único.' },
   { id: 'latinhas-aluminio', title: 'Latinhas de alumínio', category: 'Alumínio', image: latinhas, gallery: [] as string[], city: 'Caucaia', state: 'CE', weight: '800 kg/mês', recurring: true, price: null as number | null, unit: '', company: 'Gerador demonstrativo D', description: 'Latas de bebida pós-consumo, separadas e sem outros resíduos. Coleta mensal a combinar.' },
   { id: 'ferro-chaparia', title: 'Ferro e chaparia de manutenção', category: 'Ferro e Aço', image: ferroAco, gallery: [] as string[], city: 'Maracanaú', state: 'CE', weight: '4 toneladas', recurring: false, price: null as number | null, unit: '', company: 'Gerador demonstrativo E', description: 'Chapas, perfis e peças de ferro de manutenção industrial. Lote único, retirada com caminhão.' },
